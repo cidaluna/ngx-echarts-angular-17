@@ -1,0 +1,12 @@
+.container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-box{
+  margin-top: 22px;
+  width: 45%;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 12px;
+}
