@@ -8,7 +8,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Screenshots
 
-Tela com gráficos de barra e linha:
+Charts type bar, line, donut and half donut:
 
-![Gráficos de barra e linha](./src/assets/graficos-echarts-angular-17-Cida-Luna-Frontend-developer-sao-carlos-sp-brasil.PNG)
+![Gráficos ECharts](./src/assets/graficos-echarts-angular-17-Cida-Luna-Frontend.PNG)
 
