@@ -12,6 +12,6 @@ export class PrintService {
     // Aguarda um pequeno delay para o layout estabilizar antes de abrir o PDF
     setTimeout(() => {
       window.print();
-    }, 300);
+    }, 800);
   }
 }
