@@ -8,7 +8,7 @@ import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
   templateUrl: './horizontal-bar-chart.component.html',
-  styleUrl: './horizontal-bar-chart.component.css',
+  styleUrl: './horizontal-bar-chart.component.scss',
   providers: [
           {
             provide: NGX_ECHARTS_CONFIG,

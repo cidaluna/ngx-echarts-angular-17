@@ -3,14 +3,20 @@ import { BarChartComponent } from "../bar-chart/bar-chart.component";
 import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { HalfDonutComponent } from "../half-donut/half-donut.component";
 import { HorizontalBarChartComponent } from "../horizontal-bar-chart/horizontal-bar-chart.component";
+import { PrintService } from '../services/print.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [BarChartComponent, PieChartComponent, HalfDonutComponent, HorizontalBarChartComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 
+  constructor(private readonly printService: PrintService) { }
+
+  printDashboard() {
+    this.printService.print();
+  }
 }

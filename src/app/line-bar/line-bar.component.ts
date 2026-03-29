@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
   templateUrl: './line-bar.component.html',
-  styleUrl: './line-bar.component.css',
+  styleUrl: './line-bar.component.scss',
   providers: [
       {
         provide: NGX_ECHARTS_CONFIG,

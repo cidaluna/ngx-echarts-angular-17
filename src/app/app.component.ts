@@ -12,7 +12,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
   providers: [
     provideEchartsCore({ echarts }),
   ]

@@ -1,0 +1,70 @@
+.text-button {
+  border: 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: #1967d2;
+  color: #fff;
+  cursor: pointer;
+  float: right;
+  font-size: .875em;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+}
+
+.container__row {
+  display: flex;
+  flex-wrap: wrap; // Garante que se a tela diminuir, eles quebrem a linha
+  gap: 8px;      // Espaçamento moderno entre os boxes
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.container__box {
+  flex: 1 1 calc(50% - 8px);  // Ocupa 50% menos o gap
+  max-width: 50%;             // Trava o crescimento
+  height: 400px;              // Defina uma altura fixa
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;           // Impede qualquer "vazamento" visual
+  position: relative;         // Para posicionamento interno se necessário
+
+  // Melhorando o componente interno e o ECharts
+  // Forçamos o componente interno a preencher o box de 400px
+  ::ng-deep {
+    app-bar-chart, app-horizontal-bar-chart,
+    app-pie-chart, app-half-donut,
+    .echarts,
+    div[_echarts_instance_],
+    canvas {
+      height: 100% !important;
+      width: 100% !important;
+      display: block;
+    }
+  }
+}
+
+@media print {
+  // Esconde o botão de imprimir e outros elementos desnecessários
+  .text-button,
+  h1 {
+    display: none !important;
+  }
+
+  .container__row {
+    display: flex !important;
+    flex-direction: row !important; // Mantém lado a lado se couber
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .container__box {
+    flex: 0 0 48%; // Um pouco menos de 50% para evitar quebra por margens de impressão
+    max-width: 48%;
+    border: 1px solid #000;
+    break-inside: avoid; // Essencial para o PDF não cortar o gráfico ao meio
+  }
+
+}

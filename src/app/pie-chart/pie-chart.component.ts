@@ -8,7 +8,7 @@ import { EChartsOption } from 'echarts';
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
   templateUrl: './pie-chart.component.html',
-  styleUrl: './pie-chart.component.css',
+  styleUrl: './pie-chart.component.scss',
   providers: [
         {
           provide: NGX_ECHARTS_CONFIG,

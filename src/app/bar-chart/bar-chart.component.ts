@@ -8,7 +8,7 @@ import { NGX_ECHARTS_CONFIG, NgxEchartsDirective, NgxEchartsModule } from 'ngx-e
   standalone: true,
   imports: [CommonModule, NgxEchartsModule, NgxEchartsDirective],
   templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.css',
+  styleUrl: './bar-chart.component.scss',
   providers: [
     {
       provide: NGX_ECHARTS_CONFIG,

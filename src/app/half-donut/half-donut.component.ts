@@ -8,7 +8,7 @@ import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
   templateUrl: './half-donut.component.html',
-  styleUrl: './half-donut.component.css',
+  styleUrl: './half-donut.component.scss',
   providers: [
         {
           provide: NGX_ECHARTS_CONFIG,
