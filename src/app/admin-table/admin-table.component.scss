@@ -1,0 +1,151 @@
+// Variáveis para manter o padrão visual
+$primary-blue: #1967d2;
+$border-color: #e0e0e0;
+$text-dark: #3c4043;
+$bg-light: #f8f9fa;
+$breakpoint-tablet: 1190px;
+
+// Wrapper para controle de scroll no Tablet/Browser
+.table-responsive-wrapper {
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin: 8px 0;
+}
+
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-radius: 16px;
+  color: $text-dark;
+
+  thead {
+    tr {
+      background-color: #3fb2eb;
+      border-bottom: 2px solid $border-color;
+    }
+    th {
+      padding: 8px;
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #1c1c1c;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+      &:hover { background-color: #fdfdfd; }
+    }
+    td {
+      padding: 12px;
+      font-size: 0.85rem;
+      vertical-align: middle;
+      word-wrap: break-word;       // Força a quebra de palavras longas (como e-mails)
+      overflow-wrap: break-word;   // Garante que o texto pule de linha se não couber
+      word-break: break-word;      // Reforça a quebra para navegadores antigos
+    }
+  }
+}
+
+// Tags de Status e Prioridade
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  &.active {
+    background: #e6f4ea;
+    color: #02561b;
+  }
+  &.inactive {
+    background: #fce8e6;
+    color: #980b01;
+  }
+}
+
+// --- CONFIGURAÇÃO DE IMPRESSÃO (SEM OVERFLOW) ---
+// @media print {
+//   @page {
+//     size: landscape; // Essencial para 12 colunas
+//     margin: 0.5cm;
+//   }
+
+//   .no-print { display: none !important; }
+
+//   .dashboard-container { padding: 0; }
+
+//   .table-responsive-wrapper {
+//     overflow: visible !important;
+//     box-shadow: none;
+//   }
+
+//   .main-table {
+//     min-width: 100% !important; // Força a caber na largura da folha
+//     table-layout: fixed; // Distribui as colunas proporcionalmente
+
+//     th, td {
+//       padding: 6px 4px !important;
+//       font-size: 7.5pt !important; // Fonte reduzida para o PDF
+//       border: 1px solid #ccc !important;
+//       word-wrap: break-word;
+//       overflow-wrap: break-word;
+//     }
+
+//     // Ajuste fino para colunas específicas no print
+//     th:nth-child(1), td:nth-child(1) { width: 30px; } // ID menor
+//     th:nth-child(8), td:nth-child(8) { width: 35px; } // UF menor
+//   }
+// }
+
+// --- RESPONSIVIDADE MOBILE (VIEW DE CARDS) ---
+@media (max-width: $breakpoint-tablet) {
+  .table-responsive-wrapper {
+    overflow-x: hidden;
+    background: transparent;
+  }
+
+  .main-table {
+    min-width: 100%;
+    display: block;
+
+    thead { display: none; } // Esconde o cabeçalho original
+
+    tbody {
+      display: block;
+      tr {
+        display: block;
+        background: white;
+        margin-bottom: 15px;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 8px 5px;
+        text-align: right;
+
+        &:last-child { border-bottom: none; }
+
+        // O segredo do rótulo à esquerda:
+        &::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: $primary-blue;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          flex: 1;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

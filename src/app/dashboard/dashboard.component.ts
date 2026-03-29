@@ -4,11 +4,12 @@ import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { HalfDonutComponent } from "../half-donut/half-donut.component";
 import { HorizontalBarChartComponent } from "../horizontal-bar-chart/horizontal-bar-chart.component";
 import { PrintService } from '../services/print.service';
+import { AdminTableComponent } from '../admin-table/admin-table.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [BarChartComponent, PieChartComponent, HalfDonutComponent, HorizontalBarChartComponent],
+  imports: [AdminTableComponent, BarChartComponent, PieChartComponent, HalfDonutComponent, HorizontalBarChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
