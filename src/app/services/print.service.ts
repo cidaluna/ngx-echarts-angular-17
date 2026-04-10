@@ -6,12 +6,19 @@ import { Injectable } from '@angular/core';
 export class PrintService {
 
   print() {
-    // Pequeno truque: dispara um evento de resize global para o ECharts ler
+    // ativa modo print só para dashboard
+    document.body.classList.add('print-dashboard');
+
     window.dispatchEvent(new Event('resize'));
 
-    // Aguarda um pequeno delay para o layout estabilizar antes de abrir o PDF
     setTimeout(() => {
       window.print();
-    }, 800);
+
+      // remove depois
+      setTimeout(() => {
+        document.body.classList.remove('print-dashboard');
+      }, 500);
+
+    }, 500);
   }
 }

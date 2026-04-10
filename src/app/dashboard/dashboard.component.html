@@ -1,17 +1,17 @@
-<h1>Lib ngx-echarts - Angular 17</h1>
-<button class="text-button" (click)="printDashboard()">Print</button>
-<div class="container__row">
+<div class="container__header">
+  <h1>Dashboard - Lib ngx-echarts - Angular 17</h1>
+  <button class="text-button" (click)="printDashboard()">Print</button>
+</div>
+<div class="container__table">
   <app-admin-table></app-admin-table>
 </div>
-<div class="container__row">
+<div class="container__charts">
   <div class="container__box">
     <app-bar-chart></app-bar-chart>
   </div>
   <div class="container__box">
     <app-horizontal-bar-chart></app-horizontal-bar-chart>
   </div>
-</div>
-<div class="container__row">
   <div class="container__box">
     <app-pie-chart></app-pie-chart>
   </div>

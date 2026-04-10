@@ -67,39 +67,6 @@ $breakpoint-tablet: 1190px;
   }
 }
 
-// --- CONFIGURAÇÃO DE IMPRESSÃO (SEM OVERFLOW) ---
-// @media print {
-//   @page {
-//     size: landscape; // Essencial para 12 colunas
-//     margin: 0.5cm;
-//   }
-
-//   .no-print { display: none !important; }
-
-//   .dashboard-container { padding: 0; }
-
-//   .table-responsive-wrapper {
-//     overflow: visible !important;
-//     box-shadow: none;
-//   }
-
-//   .main-table {
-//     min-width: 100% !important; // Força a caber na largura da folha
-//     table-layout: fixed; // Distribui as colunas proporcionalmente
-
-//     th, td {
-//       padding: 6px 4px !important;
-//       font-size: 7.5pt !important; // Fonte reduzida para o PDF
-//       border: 1px solid #ccc !important;
-//       word-wrap: break-word;
-//       overflow-wrap: break-word;
-//     }
-
-//     // Ajuste fino para colunas específicas no print
-//     th:nth-child(1), td:nth-child(1) { width: 30px; } // ID menor
-//     th:nth-child(8), td:nth-child(8) { width: 35px; } // UF menor
-//   }
-// }
 
 // --- RESPONSIVIDADE MOBILE (VIEW DE CARDS) ---
 @media (max-width: $breakpoint-tablet) {

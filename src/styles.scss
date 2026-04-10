@@ -1,9 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
-* {
-  margin: 0;
-  padding: 0;
-}
+@media print {
 
-body {
-  padding: 1rem;
+  @page {
+    size: A4 portrait;
+    margin: 5mm;
+  }
+
+  body.print-dashboard {
+
+    app-admin-table {
+
+      .table-responsive-wrapper {
+        overflow: visible !important;
+        box-shadow: none !important;
+      }
+
+      .main-table {
+        display: table !important;
+        width: 100% !important;
+        table-layout: auto !important;
+      }
+
+      thead {
+        display: table-header-group !important;
+      }
+
+      tbody {
+        display: table-row-group !important;
+      }
+
+      tr {
+        display: table-row !important;
+        page-break-inside: avoid;
+      }
+
+      th, td {
+        display: table-cell !important;
+        white-space: nowrap !important;
+        font-size: 9px;
+        padding: 4px;
+
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        word-wrap: normal !important;
+      }
+
+      td::before {
+        display: none !important;
+        content: none !important;
+      }
+
+    }
+
+  }
 }
