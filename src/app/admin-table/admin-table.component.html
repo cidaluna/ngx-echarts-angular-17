@@ -1,42 +1,62 @@
-<div class="table-responsive-wrapper">
-  <table class="main-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>E-mail</th>
-        <th>Phone</th>
-        <th>Company</th>
-        <th>Role</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Purchase</th>
-        <th>Total</th>
-        <th>Status</th>
-        <th>Priority</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (customer of customers(); track customer.id) {
-        <tr>
-          <td data-label="ID">{{ customer.id }}</td>
-          <td data-label="Name"><strong>{{ customer.name }}</strong></td>
-          <td data-label="E-mail">{{ customer.email }}</td>
-          <td data-label="Phone">{{ customer.phone }}</td>
-          <td data-label="Company">{{ customer.company }}</td>
-          <td data-label="Role">{{ customer.role }}</td>
-          <td data-label="City">{{ customer.city }}</td>
-          <td data-label="State">{{ customer.state }}</td>
-          <td data-label="Purchase">{{ customer.lastPurchase | date:'dd/MM/yy' }}</td>
-          <td data-label="Total">{{ customer.totalSpent | currency:'BRL' }}</td>
-          <td data-label="Status">
-            <span class="badge" [ngClass]="customer.status">
-              {{ customer.status }}
-            </span>
-          </td>
-          <td data-label="Priority">{{ customer.priority }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
+@if (loading) {
+  <div>Carregando...</div>
+}
+
+@if (!loading) {
+  @if (visibleCustomers.length === 0) {
+    <div>Nenhum cliente encontrado.</div>
+  }
+
+  @if (visibleCustomers.length > 0) {
+    <div>Total de clientes: {{ visibleCustomers.length }}</div>
+    <br>
+    <div class="table-responsive-wrapper">
+      <table class="main-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Phone</th>
+            <th>Company</th>
+            <th>Role</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Purchase</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (customer of visibleCustomers; track customer.id) {
+            <tr>
+              <td data-label="ID">{{ customer.id }}</td>
+              <td data-label="Name"><strong>{{ customer.name }}</strong></td>
+              <td data-label="E-mail">{{ customer.email }}</td>
+              <td data-label="Phone">{{ customer.phone }}</td>
+              <td data-label="Company">{{ customer.company }}</td>
+              <td data-label="Role">{{ customer.role }}</td>
+              <td data-label="City">{{ customer.city }}</td>
+              <td data-label="State">{{ customer.state }}</td>
+              <td data-label="Purchase">{{ customer.lastPurchase | date:'dd/MM/yy' }}</td>
+              <td data-label="Total">{{ customer.totalSpent | currency:'BRL' }}</td>
+              <td data-label="Status">
+                <span class="badge" [ngClass]="customer.status">
+                  {{ customer.status }}
+                </span>
+              </td>
+              <td data-label="Priority">{{ customer.priority }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+}
+
+@if (hasMore) {
+  <div>
+    <button class="btnShowMore" (click)="verMais()">Ver mais</button>
+  </div>
+}

@@ -5,6 +5,19 @@ $text-dark: #3c4043;
 $bg-light: #f8f9fa;
 $breakpoint-tablet: 1190px;
 
+.btnShowMore {
+  border: 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: #b406c7;
+  color: #fff;
+  cursor: pointer;
+  float: right;
+  font-size: .875em;
+  padding: 8px 16px;
+  margin: 16px;
+}
+
 // Wrapper para controle de scroll no Tablet/Browser
 .table-responsive-wrapper {
   width: 100%;

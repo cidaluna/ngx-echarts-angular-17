@@ -1,44 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Customer } from '../interfaces/customer.model';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-admin-table',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admin-table.component.html',
-  styleUrl: './admin-table.component.scss'
+  styleUrl: './admin-table.component.scss',
 })
-export class AdminTableComponent {
+export class AdminTableComponent implements OnInit {
+  private service = inject(CustomerService);
 
-  public customers = signal<Customer[]>([
-    {
-      id: 1,
-      name: 'Luciana Oliveira',
-      email: 'luciana.oliveira.1987@company.com',
-      phone: '(11) 98877-6655',
-      company: 'SoftPlan Tech',
-      role: 'Tech Lead',
-      city: 'São Paulo',
-      state: 'SP',
-      lastPurchase: new Date('2024-03-10'),
-      totalSpent: 12550,
-      status: 'active',
-      priority: 'High'
-    },
-    {
-      id: 2,
-      name: 'Marcos Pontes',
-      email: 'm.pontes@logistics.com',
-      phone: '(21) 97766-5544',
-      company: 'Logix Express',
-      role: 'Operations Manager',
-      city: 'Rio de Janeiro',
-      state: 'RJ',
-      lastPurchase: new Date('2024-02-25'),
-      totalSpent: 4200,
-      status: 'inactive',
-      priority: 'Medium'
-    }
-  ]);
+  allCustomers: Customer[] = [];
+  visibleCustomers: Customer[] = [];
+
+  loading = true;
+
+  limit = 10; // começa com 10
+
+  ngOnInit() {
+    this.service.getCustomers().subscribe({
+      next: (data) => {
+        this.allCustomers = data;
+        this.updateVisible();
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  updateVisible() {
+    this.visibleCustomers = this.allCustomers.slice(0, this.limit);
+  }
+
+  verMais() {
+    this.limit += 10;
+    this.updateVisible();
+  }
+
+  get hasMore(): boolean {
+    return this.limit < this.allCustomers.length;
+  }
 }
