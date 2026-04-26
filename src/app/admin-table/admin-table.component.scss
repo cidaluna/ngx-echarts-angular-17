@@ -5,6 +5,12 @@ $text-dark: #3c4043;
 $bg-light: #f8f9fa;
 $breakpoint-tablet: 1190px;
 
+.base-admin {
+  font-size: 1.2em;
+  color: $text-dark;
+  padding: 16px 0;
+}
+
 .btnShowMore {
   border: 0;
   border-radius: 20px;

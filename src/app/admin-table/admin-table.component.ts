@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Customer } from '../interfaces/customer.model';
 import { CustomerService } from '../services/customer.service';
+import { HeaderTableComponent } from './components/header-table/header-table.component';
+import { ContentTableComponent } from './components/content-table/content-table.component';
 
 @Component({
   selector: 'app-admin-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderTableComponent, ContentTableComponent],
   templateUrl: './admin-table.component.html',
   styleUrl: './admin-table.component.scss',
 })
@@ -17,8 +19,8 @@ export class AdminTableComponent implements OnInit {
   visibleCustomers: Customer[] = [];
 
   loading = true;
-
-  limit = 10; // começa com 10
+  limit = 10;
+  showAll = false; // controla se deve mostrar todos ou apenas o limite inicial
 
   ngOnInit() {
     this.service.getCustomers().subscribe({
@@ -33,16 +35,24 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
+  // atualiza a lista de clientes visíveis com base no estado de showAll
   updateVisible() {
-    this.visibleCustomers = this.allCustomers.slice(0, this.limit);
+    if (this.showAll) {
+      this.visibleCustomers = this.allCustomers;
+    } else {
+      this.visibleCustomers = this.allCustomers.slice(0, this.limit);
+    }
   }
 
-  verMais() {
-    this.limit += 10;
+  // o output do header-table chama esse método para mostrar todos os clientes
+  // ou seja, quando clicado em "ver todos", showAll é setado para true e a lista visível é atualizada para mostrar tudo
+  onSeeAllCustormers() {
+    this.showAll = true;
     this.updateVisible();
   }
 
-  get hasMore(): boolean {
-    return this.limit < this.allCustomers.length;
+  // serve para mostrar o botão "ver todos" apenas se tiver mais clientes do que o limite inicial
+  get canShowAllCustomers(): boolean {
+    return this.allCustomers.length > this.limit;
   }
 }
