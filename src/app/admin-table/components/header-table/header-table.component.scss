@@ -1,0 +1,23 @@
+.header-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    font-size: 1.5em;
+    color: #01858c;
+    margin: 0;
+  }
+
+  button {
+    border: 0;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: #01858c;
+    color: #fff;
+    cursor: pointer;
+    font-size: .875em;
+    padding: 8px 16px;
+  }
+}
