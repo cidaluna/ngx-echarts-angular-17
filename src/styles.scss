@@ -5,6 +5,10 @@
     margin: 5mm;
   }
 
+  .no-print {
+    display: none !important;
+  }
+
   body.print-dashboard {
 
     app-admin-table {
@@ -47,6 +51,15 @@
       td::before {
         display: none !important;
         content: none !important;
+      }
+
+      .hide-print {
+        display: none !important;
+      }
+
+      th:nth-child(6),
+      td:nth-child(6) {
+        display: none !important;
       }
 
     }

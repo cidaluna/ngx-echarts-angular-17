@@ -4,10 +4,10 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>E-mail</th>
+            <th class="hide-print">E-mail</th>
             <th>Phone</th>
             <th>Company</th>
-            <th>Role</th>
+            <th class="hide-print">Role</th>
             <th>City</th>
             <th>State</th>
             <th>Purchase</th>
@@ -21,10 +21,10 @@
             <tr>
               <td data-label="ID">{{ customer.id }}</td>
               <td data-label="Name"><strong>{{ customer.name }}</strong></td>
-              <td data-label="E-mail">{{ customer.email }}</td>
+              <td class="hide-print" data-label="E-mail">{{ customer.email }}</td>
               <td data-label="Phone">{{ customer.phone }}</td>
               <td data-label="Company">{{ customer.company }}</td>
-              <td data-label="Role">{{ customer.role }}</td>
+              <td class="hide-print" data-label="Role">{{ customer.role }}</td>
               <td data-label="City">{{ customer.city }}</td>
               <td data-label="State">{{ customer.state }}</td>
               <td data-label="Purchase">{{ customer.lastPurchase | date:'dd/MM/yy' }}</td>
