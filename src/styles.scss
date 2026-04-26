@@ -57,10 +57,12 @@
         display: none !important;
       }
 
-      th:nth-child(6),
-      td:nth-child(6) {
-        display: none !important;
-      }
+      // Hide especific column (6th column)
+      // Is dangerous because if the table structure changes, it may hide the wrong column. Use with caution.
+      // th:nth-child(6),
+      // td:nth-child(6) {
+      //   display: none !important;
+      // }
 
     }
 
