@@ -4,16 +4,25 @@
 
 @if (!loading) {
 
-  @if (visibleCustomers.length === 0) {
-    <div class="base-admin">Nenhum cliente encontrado.</div>
-  }
-
   @if (visibleCustomers.length > 0) {
-    <app-header-table (eventSeeAll)="onSeeAllCustormers()" [showButton]="canShowAllCustomers" />
+    <app-header-table (eventSeeAll)="onSeeAllCustormers()" [showButton]="canShowAllButton" />
     <div>
+      <p>Modo: {{ viewMode }} </p>
       <p>Exibindo {{ visibleCustomers.length }} de {{ allCustomers.length }} clientes.</p>
     </div>
     <br>
     <app-content-table [customers]="visibleCustomers" />
+
+    @if (viewMode === 'pagination' && totalPages > 1) {
+      <div class="pagination">
+        @for (page of pages; track $index) {
+           <button class="pagination__btn" type="button" (click)="onChangePage(page)" [class.active]="page === currentPage">
+             {{ page }}
+           </button>
+        }
+      </div>
+    }
+  } @else {
+    <div class="base-admin">Nenhum cliente encontrado.</div>
   }
 }

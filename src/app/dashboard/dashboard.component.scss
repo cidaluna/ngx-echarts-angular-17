@@ -79,6 +79,10 @@
     overflow: visible !important;
   }
 
+  :host ::ng-deep app-admin-table .pagination {
+    display: none !important;
+  }
+
   table {
     width: 100%;
     table-layout: auto;

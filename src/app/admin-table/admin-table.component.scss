@@ -24,6 +24,46 @@ $breakpoint-tablet: 1190px;
   margin: 16px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 6px;
+
+  &__btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #b50091;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: .875em;
+    padding: 14px;
+    position: relative;
+
+    &.active {
+      background-color: #ff00bf;
+    }
+
+    &.active::after {
+      background: #fff;
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 30%;
+      width: 40%;
+      height: 2px;
+      border-radius: 4px;
+    }
+  }
+}
+
 // Wrapper para controle de scroll no Tablet/Browser
 .table-responsive-wrapper {
   width: 100%;
