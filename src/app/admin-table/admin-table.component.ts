@@ -24,7 +24,7 @@ export class AdminTableComponent implements OnInit {
 
   pageSize = 10; // número de linhas a mostrar por página
   currentPage = 1; // página atual
-  viewMode: 'limited' | 'pagination' = 'pagination'; // modo de visualização
+  viewMode: 'limited' | 'pagination' = 'limited'; // modo de visualização
 
   isModalOpen = false;
   pendingShowAll = false; // controla intenção do usuário
