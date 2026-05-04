@@ -5,6 +5,7 @@ import { CustomerService } from '../services/customer.service';
 import { HeaderTableComponent } from './components/header-table/header-table.component';
 import { ContentTableComponent } from './components/content-table/content-table.component';
 import { ModalTableComponent } from './components/modal-table/modal-table.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-admin-table',
@@ -20,20 +21,26 @@ export class AdminTableComponent implements OnInit {
   visibleCustomers: Customer[] = [];
 
   loading = true;
-  //limit = 10;
-  showAll = false; // controla se deve mostrar todos ou apenas o limite inicial
 
   pageSize = 10; // número de linhas a mostrar por página
   currentPage = 1; // página atual
-  viewMode: 'limited' | 'all' | 'pagination' = 'limited'; // modo de visualização
+  viewMode: 'limited' | 'pagination' = 'pagination'; // modo de visualização
 
   isModalOpen = false;
   pendingShowAll = false; // controla intenção do usuário
+  hasFullAccess = false; // indica se o usuário tem acesso total (assinatura ativa)
 
   ngOnInit() {
-    this.service.getCustomers().subscribe({
-      next: (data) => {
-        this.allCustomers = data;
+    this.loading = true;
+
+    forkJoin({
+      customers: this.service.getCustomers(),
+      user: this.service.hasFullAccess()
+    }).subscribe({
+      next: ({ customers, user }) => {
+        this.allCustomers = customers;
+        this.hasFullAccess = user.hasFullAccess;
+
         this.updateVisibleCustomers();
         this.loading = false;
       },
@@ -43,59 +50,62 @@ export class AdminTableComponent implements OnInit {
     });
   }
 
-  // atualiza a lista de clientes visíveis com base no estado de showAll
-  // updateVisible() {
-  //   if (this.showAll) {
-  //     this.visibleCustomers = this.allCustomers;
-  //   } else {
-  //     this.visibleCustomers = this.allCustomers.slice(0, this.limit);
-  //   }
-  // }
-
   updateVisibleCustomers() {
-    if (this.viewMode === 'all') {
-      this.visibleCustomers = this.allCustomers;
-      return;
-    }
-
-    if(this.viewMode === 'pagination') {
-      // calcula o índice inicial com base na página atual e no tamanho da página, e
-      // depois extrai a fatia correspondente do array completo para mostrar apenas os clientes daquela página
+    // 🔹 PAGINATION (independente de acesso)
+    if (this.viewMode === 'pagination') {
       const startIndex = (this.currentPage - 1) * this.pageSize;
-      const end = startIndex + this.pageSize; // calcula o índice final para garantir que não ultrapasse o número total de clientes
-
+      const end = startIndex + this.pageSize;
       this.visibleCustomers = this.allCustomers.slice(startIndex, end);
       return;
     }
-    // se o modo for 'limited', mostra apenas os primeiros clientes até o limite definido
-    this.visibleCustomers = this.allCustomers.slice(0, this.pageSize);
+
+    // 🔹 LIMITED
+    if (this.hasFullAccess) {
+      // se já contratou → mostra tudo
+      this.visibleCustomers = this.allCustomers;
+    } else {
+      // senão → mostra só 10
+      this.visibleCustomers = this.allCustomers.slice(0, this.pageSize);
+    }
   }
 
 
   onSeeAllCustormers() {
-    // só abre modal se realmente precisa cobrar
-    if (this.canShowAllCustomers) {
-      this.isModalOpen = true;
-      this.pendingShowAll = true;
+    // segurança: só funciona no modo correto
+    if (this.viewMode !== 'limited') return;
+
+    // se não tem mais dados, não faz nada
+    if (!this.canShowAllCustomers) return;
+
+    // já contratou → mostra tudo
+    if (this.hasFullAccess) {
+       this.updateVisibleCustomers();
       return;
     }
 
-    // fallback (caso não precise modal)
-    this.enableShowAll();
-  }
-
-  private enableShowAll() {
-    this.viewMode = 'all';
-    this.currentPage = 1;
-    this.updateVisibleCustomers();
+    // não contratou → abre modal
+    this.isModalOpen = true;
+    this.pendingShowAll = true;
   }
 
   onModalConfirm() {
-    if (this.pendingShowAll) {
-      this.enableShowAll();
-    }
+     if (!this.pendingShowAll) return;
 
-    this.resetModalState();
+    this.loading = true;
+
+    this.service.contractFullAccess().subscribe({
+      next: () => {
+        this.hasFullAccess = true; // importante atualizar estado local
+        this.updateVisibleCustomers();
+        this.resetModalState();
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        // opcional: mostrar erro pro usuário
+        console.error('Erro ao contratar serviço');
+      }
+    });
   }
 
   onModalClose() {
@@ -125,7 +135,8 @@ export class AdminTableComponent implements OnInit {
   // o botão "ver todos" só é mostrado se o modo atual for "limited"
   // e houver mais clientes do que o limite inicial, garantindo que o botão só apareça quando for relevante para o usuário.
   get canShowAllButton(): boolean {
-    return this.viewMode === 'limited' && this.canShowAllCustomers;
+    return this.viewMode === 'limited'
+      && this.canShowAllCustomers;
   }
 
   // calcula o total de itens com base no array de dados completo, não apenas o visível

@@ -252,5 +252,9 @@
       "status": "inactive",
       "priority": "High"
     }
-  ]
+  ],
+  "user": {
+    "id": 1,
+    "hasFullAccess": false
+  }
 }
