@@ -4,11 +4,12 @@ import { Customer } from '../interfaces/customer.model';
 import { CustomerService } from '../services/customer.service';
 import { HeaderTableComponent } from './components/header-table/header-table.component';
 import { ContentTableComponent } from './components/content-table/content-table.component';
+import { ModalTableComponent } from './components/modal-table/modal-table.component';
 
 @Component({
   selector: 'app-admin-table',
   standalone: true,
-  imports: [CommonModule, HeaderTableComponent, ContentTableComponent],
+  imports: [CommonModule, HeaderTableComponent, ContentTableComponent, ModalTableComponent],
   templateUrl: './admin-table.component.html',
   styleUrl: './admin-table.component.scss',
 })
@@ -24,7 +25,10 @@ export class AdminTableComponent implements OnInit {
 
   pageSize = 10; // número de linhas a mostrar por página
   currentPage = 1; // página atual
-  viewMode: 'limited' | 'all' | 'pagination' = 'pagination'; // modo de visualização
+  viewMode: 'limited' | 'all' | 'pagination' = 'limited'; // modo de visualização
+
+  isModalOpen = false;
+  pendingShowAll = false; // controla intenção do usuário
 
   ngOnInit() {
     this.service.getCustomers().subscribe({
@@ -67,12 +71,41 @@ export class AdminTableComponent implements OnInit {
     this.visibleCustomers = this.allCustomers.slice(0, this.pageSize);
   }
 
-  // o output do header-table chama esse método para mostrar todos os clientes
-  // ou seja, quando clicado em "ver todos", showAll é setado para true e a lista visível é atualizada para mostrar tudo
+
   onSeeAllCustormers() {
+    // só abre modal se realmente precisa cobrar
+    if (this.canShowAllCustomers) {
+      this.isModalOpen = true;
+      this.pendingShowAll = true;
+      return;
+    }
+
+    // fallback (caso não precise modal)
+    this.enableShowAll();
+  }
+
+  private enableShowAll() {
     this.viewMode = 'all';
-    this.currentPage = 1; // reseta para a primeira página ao mudar para o modo "ver todos"
+    this.currentPage = 1;
     this.updateVisibleCustomers();
+  }
+
+  onModalConfirm() {
+    if (this.pendingShowAll) {
+      this.enableShowAll();
+    }
+
+    this.resetModalState();
+  }
+
+  onModalClose() {
+    // cancelou ou clicou fora
+    this.resetModalState();
+  }
+
+  private resetModalState() {
+    this.isModalOpen = false;
+    this.pendingShowAll = false;
   }
 
   // o metodo onChangePage é chamado quando o usuário clica em um número de página na paginação.
@@ -89,6 +122,8 @@ export class AdminTableComponent implements OnInit {
     return this.allCustomers.length > this.pageSize;
   }
 
+  // o botão "ver todos" só é mostrado se o modo atual for "limited"
+  // e houver mais clientes do que o limite inicial, garantindo que o botão só apareça quando for relevante para o usuário.
   get canShowAllButton(): boolean {
     return this.viewMode === 'limited' && this.canShowAllCustomers;
   }

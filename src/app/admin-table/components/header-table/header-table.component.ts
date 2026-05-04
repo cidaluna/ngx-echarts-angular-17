@@ -11,6 +11,8 @@ export class HeaderTableComponent {
   @Input() showButton = false;
   @Output() eventSeeAll = new EventEmitter<void>();
 
+  // emite um evento para o componente pai quando o botão "ver todos" é clicado, permitindo que
+  //  o componente pai responda a essa ação, como mostrar todos os clientes ou mudar o modo de visualização.
   onSeeAllCustomers() {
     this.eventSeeAll.emit();
   }

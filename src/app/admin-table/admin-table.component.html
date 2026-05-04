@@ -13,6 +13,13 @@
     <br>
     <app-content-table [customers]="visibleCustomers" />
 
+    <!-- MODAL -->
+    <app-modal-table
+      [isOpen]="isModalOpen"
+      (confirmed)="onModalConfirm()"
+      (closed)="onModalClose()">
+    </app-modal-table>
+
     @if (viewMode === 'pagination' && totalPages > 1) {
       <div class="pagination">
         @for (page of pages; track $index) {
