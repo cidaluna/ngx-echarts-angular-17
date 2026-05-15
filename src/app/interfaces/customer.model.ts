@@ -12,3 +12,12 @@ export interface Customer {
   status: 'active' | 'inactive';
   priority: 'High' | 'Medium' | 'Low';
 }
+
+export interface CustomerState {
+  customers: Customer[];
+  loading: boolean;
+  error: string | null;
+  visibleRows: number; //10 or all
+  showModal: boolean;
+  filter: string;
+}
