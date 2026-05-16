@@ -19,6 +19,10 @@ export const AdminTableActions = createActionGroup ({
     'Confirm Show All Customers Success': emptyProps(),
     'Confirm Show All Customers Failure': props<{ error: string }>(),
 
+    'Reset User Access': emptyProps(),
+    'Reset User Access Success': emptyProps(),
+    'Reset User Access Failure': props<{ error: string }>(),
+
     'Set Filter': props<{ filter: string }>(),
   },
 });

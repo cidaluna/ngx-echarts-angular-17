@@ -257,7 +257,7 @@
     {
       "id": 9,
       "userId": 123,
-      "hasAccess": true
+      "hasAccess": false
     }
   ]
 }

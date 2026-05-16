@@ -33,10 +33,12 @@ export interface ICustomerState {
   filter: string;
   hasConfirmedPurchase: boolean;
   checkingAccess: boolean;
+  loggedUserName: string | null;
 }
 
 export interface ICustomerTableAccess {
   id: number;
   userId: number;
   hasAccess: boolean;
+  name: string;
 }
