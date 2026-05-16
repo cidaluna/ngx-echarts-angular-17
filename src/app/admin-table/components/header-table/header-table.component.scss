@@ -17,7 +17,14 @@
     background-color: #01858c;
     color: #fff;
     cursor: pointer;
-    font-size: .875em;
+    font-size: 14px;
+    font-weight: 500;
     padding: 8px 16px;
+    min-height: 36px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: #00676c;
+    }
   }
 }

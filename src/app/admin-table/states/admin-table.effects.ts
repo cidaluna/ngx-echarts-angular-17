@@ -67,4 +67,21 @@ export class AdminTableEffects {
       )
     );
   });
+
+  resetUserAccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminTableActions.resetUserAccess),
+
+      switchMap(() =>
+        this.customerService.revokeAccess().pipe(
+          map(() =>
+            AdminTableActions.resetUserAccessSuccess()
+          ),
+          catchError(() =>
+            of(AdminTableActions.resetUserAccessFailure({ error: `Não foi possível resetar o usuário.` }))
+          )
+        )
+      )
+    );
+  });
 }

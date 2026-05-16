@@ -3,6 +3,12 @@
 } @else if (error$ | async) {
   <p>Erro aqui, verificar</p>
 } @else {
+    <section>
+      <p>{{ (userAccessLabel$ | async) ?? 'Nenhum usuário está logado!!'}}</p>
+      <button class="admin-table__button no-print" (click)="onResetUserAccess()">
+        Reset user
+      </button>
+    </section>
     <app-header-table
     [description]="(headerDescription$ | async) ?? ''"
     [showViewAllButton]="(hasMoreCustomersToShow$ | async) ?? false"

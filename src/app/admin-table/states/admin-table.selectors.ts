@@ -9,6 +9,11 @@ export const selectCustomers = createSelector(
   (state) => state.customers
 );
 
+export const selectLoggedUserName = createSelector(
+  selectAdminTableState,
+  (state) => state.loggedUserName
+);
+
 export const selectLoading = createSelector(
   selectAdminTableState,
   (state) => state.loading
@@ -100,3 +105,16 @@ export const selectHeaderDescription = createSelector(
     return `Exibindo ${visibleCustomersCount} de ${DEFAULT_VISIBLE_LIMIT} clientes liberados.`
   }
 );
+
+export const selectUserAccessLabel = createSelector(
+  selectLoggedUserName,
+  selectHasConfirmedPurchase,
+  (loggedUserName, hasConfirmedPurchase): string => {
+    if (!loggedUserName) {
+      return 'Nenhum usuário logado.'
+    }
+    return hasConfirmedPurchase
+    ? `${loggedUserName} possui acesso completo.`
+    : `${loggedUserName} possui acesso limitado!`
+  }
+)

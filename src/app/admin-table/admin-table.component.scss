@@ -24,6 +24,24 @@ $breakpoint-tablet: 1190px;
   margin: 16px;
 }
 
+.admin-table__button {
+  border: 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: #8e0080;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  min-height: 36px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #6a005f;
+  }
+}
+
 .pagination {
   display: flex;
   justify-content: flex-end;

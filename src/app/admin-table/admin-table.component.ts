@@ -5,7 +5,7 @@ import { ContentTableComponent } from './components/content-table/content-table.
 import { ModalTableComponent } from './components/modal-table/modal-table.component';
 import { Store } from '@ngrx/store';
 import { AdminTableActions } from './states/admin-table.actions';
-import { selectError, selectHeaderDescription, selectLoading, selectShowModal, selectVisibleCustomers, selectHasMoreCustomersToShow } from './states/admin-table.selectors';
+import { selectError, selectHeaderDescription, selectLoading, selectShowModal, selectVisibleCustomers, selectHasMoreCustomersToShow, selectUserAccessLabel } from './states/admin-table.selectors';
 
 @Component({
   selector: 'app-admin-table',
@@ -24,6 +24,7 @@ export class AdminTableComponent implements OnInit {
   showModal$ = this.store.select(selectShowModal);
   hasMoreCustomersToShow$ = this.store.select(selectHasMoreCustomersToShow);
   headerDescription$ = this.store.select(selectHeaderDescription);
+  userAccessLabel$ = this.store.select(selectUserAccessLabel);
 
   // Carrega os clientes quando a tela é iniciada e consulta o direito de acesso
   ngOnInit(): void {
@@ -34,6 +35,11 @@ export class AdminTableComponent implements OnInit {
   // Atualiza o filtro digitado pelo usuário
   onFilterChange(filter: string): void {
     this.store.dispatch(AdminTableActions.setFilter({ filter}));
+  }
+
+  // Reseta o usuário de exemplo e remove o acesso a todos os registros da tabela
+  onResetUserAccess(): void {
+    this.store.dispatch(AdminTableActions.resetUserAccess());
   }
 
   // Abre modal de contratação

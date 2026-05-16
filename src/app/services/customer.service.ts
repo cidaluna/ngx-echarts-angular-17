@@ -32,11 +32,11 @@ export class CustomerService {
     return this.http.get<ICustomer[]>(this.apiCustomers);
   }
 
-  //  opcional (cancelar) para remover acesso total, caso queira testar o fluxo de cobrança novamente sem precisar resetar o banco
-  // revokeAccess(): Observable<any> {
-  //   return this.http.patch(this.apiUser, {
-  //     hasFullAccess: false
-  //   });
-  // }
+  //opcional para remover acesso total, caso queira testar o fluxo de cobrança novamente sem precisar resetar o db.json
+  revokeAccess(): Observable<ICustomerTableAccess> {
+    return this.http.patch<ICustomerTableAccess>(`${this.apiTableAccess}/${this.id}`, {
+      hasAccess: false,
+    });
+  }
 
 }
