@@ -12,6 +12,7 @@ export const initialState: ICustomerState = {
   showModal: false,
   filter: '',
   hasConfirmedPurchase: false,
+  checkingAccess: false,
 }
 
 export const adminTableReducer = createReducer (
@@ -31,6 +32,41 @@ export const adminTableReducer = createReducer (
   })),
 
   on(AdminTableActions.loadCustomersFailure, (state, { error }): ICustomerState => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  on(AdminTableActions.checkCustomerTableAccess, (state): ICustomerState => ({
+    ...state,
+    checkingAccess: true,
+  })),
+
+  on(AdminTableActions.checkCustomerTableAccessSuccess, (state, { hasAccess }): ICustomerState => ({
+    ...state,
+    checkingAccess: false,
+    hasConfirmedPurchase: hasAccess,
+  })),
+
+  on(AdminTableActions.checkCustomerTableAccessFailure, (state, { error }): ICustomerState => ({
+    ...state,
+    checkingAccess: false,
+    error,
+  })),
+
+  on(AdminTableActions.confirmShowAllCustomers, (state): ICustomerState => ({
+    ...state,
+    loading: false,
+  })),
+
+  on(AdminTableActions.confirmShowAllCustomersSuccess, (state): ICustomerState => ({
+    ...state,
+    loading: false,
+    showModal: false,
+    hasConfirmedPurchase: true,
+  })),
+
+  on(AdminTableActions.confirmShowAllCustomersFailure, (state, { error }): ICustomerState => ({
     ...state,
     loading: false,
     error,

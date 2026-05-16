@@ -32,4 +32,11 @@ export interface ICustomerState {
   showModal: boolean;
   filter: string;
   hasConfirmedPurchase: boolean;
+  checkingAccess: boolean;
+}
+
+export interface ICustomerTableAccess {
+  id: number;
+  userId: number;
+  hasAccess: boolean;
 }

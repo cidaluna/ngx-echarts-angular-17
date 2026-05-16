@@ -7,9 +7,18 @@ export const AdminTableActions = createActionGroup ({
     'Load Customers': emptyProps(),
     'Load Customers Success': props<{ customers: ICustomer[] }>(),
     'Load Customers Failure': props<{ error: string }>(),
+
+    'Check Customer Table Access': emptyProps(),
+    'Check Customer Table Access Success': props<{ hasAccess: boolean }>(),
+    'Check Customer Table Access Failure': props<{ error: string }>(),
+
     'Open Modal': emptyProps(),
     'Close Modal': emptyProps(),
+
     'Confirm Show All Customers': emptyProps(),
+    'Confirm Show All Customers Success': emptyProps(),
+    'Confirm Show All Customers Failure': props<{ error: string }>(),
+
     'Set Filter': props<{ filter: string }>(),
   },
 });

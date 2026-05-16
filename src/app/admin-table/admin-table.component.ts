@@ -25,9 +25,10 @@ export class AdminTableComponent implements OnInit {
   hasMoreCustomersToShow$ = this.store.select(selectHasMoreCustomersToShow);
   headerDescription$ = this.store.select(selectHeaderDescription);
 
-  // Carrega os clientes quando a tela é iniciada
+  // Carrega os clientes quando a tela é iniciada e consulta o direito de acesso
   ngOnInit(): void {
     this.store.dispatch(AdminTableActions.loadCustomers());
+    this.store.dispatch(AdminTableActions.checkCustomerTableAccess());
   }
 
   // Atualiza o filtro digitado pelo usuário

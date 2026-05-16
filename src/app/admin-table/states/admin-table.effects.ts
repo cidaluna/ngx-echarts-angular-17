@@ -33,4 +33,38 @@ export class AdminTableEffects {
       )
     );
   });
+
+  checkCustomerTableAccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminTableActions.checkCustomerTableAccess),
+
+      switchMap(() =>
+        this.customerService.checkAccess().pipe(
+          map((hasAccess) =>
+            AdminTableActions.checkCustomerTableAccessSuccess({ hasAccess })
+          ),
+          catchError(() =>
+            of(AdminTableActions.checkCustomerTableAccessFailure({ error: `Não foi possível verificar o acesso a tabela.` }))
+          )
+        )
+      )
+    );
+  });
+
+  confirmShowAllCustomers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminTableActions.confirmShowAllCustomers),
+
+      switchMap(() =>
+        this.customerService.confirmPurchase().pipe(
+          map(() =>
+            AdminTableActions.confirmShowAllCustomersSuccess()
+          ),
+          catchError(() =>
+            of(AdminTableActions.confirmShowAllCustomersFailure({ error: `Não foi possível confirmar a contratação.` }))
+          )
+        )
+      )
+    );
+  });
 }
