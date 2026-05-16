@@ -1,35 +1,24 @@
-@if (loading) {
-  <div class="base-admin">Carregando...</div>
-}
-
-@if (!loading) {
-
-  @if (visibleCustomers.length > 0) {
-    <app-header-table (eventSeeAll)="onSeeAllCustormers()" [showButton]="canShowAllButton" />
+@if (loading$ | async) {
+  <div class="base-admin">Carregando clientes...</div>
+} @else if (error$ | async) {
+  <p>Erro aqui, verificar</p>
+} @else {
+    <app-header-table
+    [description]="(headerDescription$ | async) ?? ''"
+    [showViewAllButton]="(hasMoreCustomersToShow$ | async) ?? false"
+    (filterChange)="onFilterChange($event)"
+    (eventViewAll)="onViewAll()" />
     <div>
-      <p>Modo: {{ viewMode }} </p>
-      <p>Exibindo {{ visibleCustomers.length }} de {{ allCustomers.length }} clientes.</p>
+      <p>Exibindo x de y clientes.</p>
     </div>
     <br>
-    <app-content-table [customers]="visibleCustomers" />
+    <app-content-table [customers]="(customers$ | async) ?? []" />
+}
 
-    <!-- MODAL -->
-    <app-modal-table
-      [isOpen]="isModalOpen"
-      (confirmed)="onModalConfirm()"
-      (closed)="onModalClose()">
-    </app-modal-table>
-
-    @if (viewMode === 'pagination' && totalPages > 1) {
-      <div class="pagination">
-        @for (page of pages; track $index) {
-           <button class="pagination__btn" type="button" (click)="onChangePage(page)" [class.active]="page === currentPage">
-             {{ page }}
-           </button>
-        }
-      </div>
-    }
-  } @else {
-    <div class="base-admin">Nenhum cliente encontrado.</div>
-  }
+<!-- MODAL -->
+@if (showModal$ | async) {
+  <app-modal-table
+    (confirm)="onConfirmModal()"
+    (cancel)="onCancelModal()">
+  </app-modal-table>
 }

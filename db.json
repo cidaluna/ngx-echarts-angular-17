@@ -253,8 +253,11 @@
       "priority": "High"
     }
   ],
-  "user": {
-    "id": 1,
-    "hasFullAccess": false
-  }
+  "customerTableAccess": [
+    {
+      "id": 9,
+      "userId": 123,
+      "hasAccess": true
+    }
+  ]
 }

@@ -1,19 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header-table',
   standalone: true,
   imports: [],
   templateUrl: './header-table.component.html',
-  styleUrl: './header-table.component.scss'
+  styleUrl: './header-table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderTableComponent {
-  @Input() showButton = false;
-  @Output() eventSeeAll = new EventEmitter<void>();
+  @Input({ required: true }) description = '';
+  @Input() showViewAllButton = false;
 
-  // emite um evento para o componente pai quando o botão "ver todos" é clicado, permitindo que
-  //  o componente pai responda a essa ação, como mostrar todos os clientes ou mudar o modo de visualização.
-  onSeeAllCustomers() {
-    this.eventSeeAll.emit();
+  @Output() filterChange = new EventEmitter<string>();
+  @Output() eventViewAll = new EventEmitter<void>();
+
+  // Envia o texto digitado para o componente pai
+  onFilterChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.filterChange.emit(input.value);
+  }
+
+  // emite um evento para o componente pai solicitando a abertura do modal
+  onViewAll() {
+    this.eventViewAll.emit();
   }
 }
