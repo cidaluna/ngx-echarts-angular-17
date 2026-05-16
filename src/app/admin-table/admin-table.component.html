@@ -3,8 +3,8 @@
 } @else if (error$ | async) {
   <p>Erro aqui, verificar</p>
 } @else {
-    <section>
-      <p>{{ (userAccessLabel$ | async) ?? 'Nenhum usuário está logado!!'}}</p>
+    <section class="admin-table no-print">
+      <p class="admin-table__title">{{ (userAccessLabel$ | async) ?? 'Nenhum usuário está logado!!'}}</p>
       <button class="admin-table__button no-print" (click)="onResetUserAccess()">
         Reset user
       </button>

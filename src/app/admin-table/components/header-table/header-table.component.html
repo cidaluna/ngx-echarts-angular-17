@@ -1,7 +1,7 @@
 <header class="header-table">
-  <h2>Lista de clientes cadastrados</h2>
+  <h2 class="header-table__title">Lista de clientes cadastrados</h2>
   <br>
-  <input type="text" placeholder="Filtrar clientes" (input)="onFilterChange($event)" />
+  <input class="header-table__filter no-print" type="text" placeholder="Filtrar clientes" (input)="onFilterChange($event)" />
   <br>
   @if (showViewAllButton) {
     <button class="header-table__button no-print" (click)="onViewAll()">

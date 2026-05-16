@@ -1,8 +1,6 @@
-// Variáveis para manter o padrão visual
-$primary-blue: #1967d2;
+@use 'styles' as global;
+
 $border-color: #e0e0e0;
-$text-dark: #3c4043;
-$bg-light: #f8f9fa;
 $breakpoint-tablet: 1190px;
 
 // Wrapper para controle de scroll no Tablet/Browser
@@ -18,20 +16,21 @@ $breakpoint-tablet: 1190px;
   border-collapse: collapse;
   table-layout: fixed;
   border-radius: 16px;
-  color: $text-dark;
+  color: global.$gray-dark;
 
   thead {
     tr {
-      background-color: #3fb2eb;
+      background-color: global.$blue-light;
       border-bottom: 2px solid $border-color;
     }
     th {
       padding: 8px;
       text-align: left;
       font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #1c1c1c;
+      color: global.$gray-dark;
     }
   }
 
@@ -59,11 +58,11 @@ $breakpoint-tablet: 1190px;
   font-weight: bold;
   &.active {
     background: #e6f4ea;
-    color: #02561b;
+    color: global.$green-dark;
   }
   &.inactive {
     background: #fce8e6;
-    color: #980b01;
+    color: global.$pink-dark;
   }
 }
 
@@ -106,7 +105,7 @@ $breakpoint-tablet: 1190px;
         &::before {
           content: attr(data-label);
           font-weight: bold;
-          color: $primary-blue;
+          color: global.$blue-dark;
           font-size: 0.7rem;
           text-transform: uppercase;
           flex: 1;
