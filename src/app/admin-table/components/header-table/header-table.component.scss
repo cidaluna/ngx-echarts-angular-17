@@ -1,20 +1,50 @@
+@use 'styles' as global;
+
 .header-table {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 
-  h2 {
+  &__title {
     font-size: 1.5em;
-    color: #01858c;
+    color: global.$green-dark;
     margin: 0;
   }
 
-  button {
+  &__filter {
+    border: 1px solid global.$gray-medium; // Borda sutil para boa visibilidade
+    border-radius: 20px;                   // Casamento perfeito com o raio do botão
+    box-sizing: border-box;
+    background-color: white;
+    color: global.$gray-dark;              // Texto principal escuro e legível
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 16px;                     // Mesmo preenchimento interno do botão
+    min-height: 36px;                      // Mesma altura exata para alinhamento horizontal perfeito
+    width: 100%;                           // Flexível para se adaptar ao container
+    max-width: 280px;                      // Limite elegante para telas maiores
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    // Estilo do texto de ajuda interno
+    &::placeholder {
+      color: global.$gray-medium;
+      opacity: 0.8;
+    }
+
+    // Efeito ao clicar/focar no campo (Acessibilidade + Design)
+    &:focus {
+      outline: none;                       // Remove a borda padrão feia do navegador
+      border-color: global.$blue-medium;   // Transição suave para o azul de destaque
+      box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2); // Brilho sutil ao redor usando o azul-medium
+    }
+  }
+
+  &__button {
     border: 0;
     border-radius: 20px;
     box-sizing: border-box;
-    background-color: #01858c;
+    background-color: global.$green-medium;
     color: #fff;
     cursor: pointer;
     font-size: 14px;
@@ -24,7 +54,7 @@
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      background-color: #00676c;
+      background-color: global.$green-dark;
     }
   }
 }

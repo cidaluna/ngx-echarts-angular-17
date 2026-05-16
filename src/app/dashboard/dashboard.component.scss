@@ -1,3 +1,5 @@
+@use 'styles' as global;
+
 :host {
   display: block;
   box-sizing: border-box;
@@ -9,18 +11,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  background-color: aquamarine;
+  background-color: global.$blue-light;
 
-  h1 {
-    color: #ff00aa;
+  &-title {
+    color: global.$gray-dark;
   }
 
-  .text-button {
+  &-print-button {
     border: 0;
     border-radius: 20px;
     box-sizing: border-box;
-    background-color: #1967d2;
-    color: #fff;
+    background-color: global.$blue-medium;
+    color: white;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -29,7 +31,7 @@
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      background-color: #054eb4;
+      background-color: global.$blue-dark;
     }
   }
 }
@@ -39,7 +41,7 @@
     flex-direction: column;
     align-items: flex-start;
 
-    .text-button {
+    &-print-button {
       margin-top: 8px;
       width: 100%;
     }
@@ -76,7 +78,7 @@
 
 /* Regras de Impressão A4 */
 @media print {
-  .text-button {
+  .container__header-print-button {
     display: none !important;
   }
 

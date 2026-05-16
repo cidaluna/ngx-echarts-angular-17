@@ -1,3 +1,22 @@
+// Paleta de Azuis (Acessível)
+$blue-dark:   #0d47a1; // Alto contraste no Branco (Ótimo para textos e botões)
+$blue-medium: #1e88e5; // Cor de destaque intermediária
+$blue-light:  #90caf9; // Alto contraste no Preto (Ótimo para textos em Dark Mode)
+
+// Paleta de Pinks / Rosas (Acessível)
+$pink-dark:   #880e4f; // Alto contraste no Branco (Sofisticado e legível)
+$pink-medium: #d81b60; // Cor de destaque intermediária
+$pink-light:  #f48fb1; // Alto contraste no Preto (Excelente visibilidade)
+
+// Paleta de Verdes (Acessível)
+$green-dark:  #1b5e20; // Alto contraste no Branco (Ótimo para mensagens de sucesso)
+$green-medium:#43a047; // Cor de destaque intermediária
+$green-light: #a5d6a7; // Alto contraste no Preto (Muito visível no escuro)
+
+$gray-dark:   #212529; // Cinza quase preto. Perfeito para textos principais no Light Mode ou fundo no Dark Mode.
+$gray-medium: #6c757d; // Cinza intermediário. Excelente para textos secundários (frases de apoio) e ícones.
+$gray-light:  #f8f9fa; // Cinza bem claro. Ideal para fundos de cards, inputs e barras de ferramentas.
+
 @media print {
 
   @page {
