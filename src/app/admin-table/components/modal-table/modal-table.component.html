@@ -1,24 +1,21 @@
-@if (isOpen) {
-  <div class="backdrop" (click)="onBackdropClick()">
+<div class="backdrop" (click)="onCancel()">
     <div class="modal" (click)="$event.stopPropagation()">
 
-      <!-- Header -->
-      <div class="modal-header">
-        <h2>{{ title }}</h2>
-        <button class="close-btn" (click)="close()">✕</button>
-      </div>
-
-      <!-- Body -->
-      <div class="modal-body">
-        <p>{{ message }}</p>
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer">
-        <button class="btn cancel" (click)="onCancel()">Cancelar</button>
-        <button class="btn confirm" (click)="onConfirm()">Contratar</button>
-      </div>
-
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>{{ title }}</h2>
+      <button class="close-btn" (click)="onCancel()" aria-label="Fechar modal">✕</button>
     </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+      <p>{{ message }}</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="btn confirm" (click)="onConfirm()">Contratar</button>
+    </div>
+
   </div>
-}
+</div>

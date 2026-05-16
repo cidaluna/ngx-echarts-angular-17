@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Customer } from '../interfaces/customer.model';
+import { ICustomer } from '../interfaces/customer.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -13,8 +13,8 @@ export class CustomerService {
   private apiUser = 'http://localhost:3000/user';
 
 
-  getCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiCustomers);
+  getCustomers(): Observable<ICustomer[]> {
+    return this.http.get<ICustomer[]>(this.apiCustomers);
   }
 
   //  verifica acesso se o usuário tem acesso total (simulando verificação de assinatura ativa)

@@ -34,7 +34,11 @@
                   {{ customer.status }}
                 </span>
               </td>
-              <td data-label="Priority">{{ customer.priority }}</td>
+              <td data-label="Priority">{{ customer.priority | priorityLabel }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="11">Nenhum cliente encontrado</td>
             </tr>
           }
         </tbody>
